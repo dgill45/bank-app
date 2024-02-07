@@ -1,4 +1,5 @@
 import React from 'react';
+import './Landing.css';
 import NavbarComponent from '../components/NavbarComponent';
 import ButtonComponent from '../components/ButtonComponent';
 
@@ -17,10 +18,12 @@ function Landing() {
       </nav>
 
       {/* Hero Section */}
-      <header>
-        <h2>Welcome to LAD Bank</h2>
-        <p>Your reliable partner in banking and finance.</p>
-        <ButtonComponent />
+      <header className='hero-section'>
+        <div className= 'hero-content'>
+          <h2 className='hero-title'>Welcome to LAD Bank</h2>
+          <p className='hero-subtitle'>Your reliable partner in banking and finance.</p>
+        </div>
+        <ButtonComponent className='hero-btn' />
       </header>
 
       {/* Features Section */}

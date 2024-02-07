@@ -1,0 +1,54 @@
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh; /* Adjust the height as needed */
+    background: url('https://media.istockphoto.com/id/1194025411/photo/woman-putting-coin-in-the-jar-with-plant.jpg?s=2048x2048&w=is&k=20&c=_NkNVM1jxGDQ4AKgKuVq1ISSEfC_NrpVs1mBHrtqjlg=') no-repeat center center/cover;
+    color: #fff; /* White text color */
+    text-align: center;
+    position: relative;
+  }
+  
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text readability */
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2; /* Ensure the content is above the overlay */
+    max-width: 600px; /* Adjust the width as needed */
+    padding: 20px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem; /* Large font size for the title */
+    margin-bottom: 20px;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem; /* Smaller font size for the subtitle */
+    margin-bottom: 30px;
+  }
+  
+  .hero-btn {
+    padding: 10px 30px;
+    font-size: 1rem;
+    color: #fff; /* White text color */
+    background-color: #007bff; /* Adjust the button color as needed */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from links styled as buttons */
+    transition: background-color 0.3s ease;
+  }
+  
+  .hero-btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
