@@ -4,6 +4,10 @@ import NavbarComponent from '../components/NavbarComponent';
 import ButtonComponent from '../components/ButtonComponent';
 
 function Landing() {
+
+  const handleClick = () => {
+    console.log('Button clicked');
+  }
   return (
     <div>
         <NavbarComponent />
@@ -23,7 +27,7 @@ function Landing() {
           <h2 className='hero-title'>Welcome to LAD Bank</h2>
           <p className='hero-subtitle'>Your reliable partner in banking and finance.</p>
         </div>
-        <ButtonComponent className='hero-btn' />
+        <ButtonComponent className='hero-btn'  onclick= {handleClick}/>
       </header>
 
       {/* Features Section */}
