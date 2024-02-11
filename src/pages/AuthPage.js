@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useAuth } from './context/AuthContext';
 import axios from 'axios';
 
 function AuthPage() {
+  const { login, logout } = useAuth();
   const [isSignUp, setIsSignUp] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,13 +15,26 @@ function AuthPage() {
     try {
       const response = await axios.post(url, { email, password });
       // Handle response, such as saving the session token
-      console.log('Token:', response.data.token);
+      login(response.data);
       // Redirect user or update UI accordingly
+
     } catch (error) {
       console.error('Error:', error.response.data);
       // Handle errors (e.g., user already exists, wrong credentials)
     }
   };
+
+    logout = async () => {
+    try {
+      await axios.post('/api/logout');
+      // Clear user session from state management and local storage
+      console.log('Logged out successfully');
+    } catch (error) {
+      console.error('Logout error:', error.response.data);
+    }
+  };
+  
+
 
   return (
     <div>
