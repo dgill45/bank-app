@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import axios from 'axios';
 
@@ -34,6 +35,14 @@ function AuthPage() {
     }
   };
   
+  
+
+    // Inside your component
+    const navigate = useNavigate();
+
+    // After successful login
+    navigate.push('/dashboard');
+
 
 
   return (

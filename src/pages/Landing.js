@@ -2,11 +2,21 @@ import React from 'react';
 import './Landing.css';
 import NavbarComponent from '../components/NavbarComponent';
 import ButtonComponent from '../components/ButtonComponent';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Landing() {
 
-  const handleClick = () => {
-    console.log('Button clicked');
+  let navigate = useNavigate();
+
+  const goToSignUp = () => {
+    navigate('/signup')
+
+    axios.post('customer/${customerId}/accounts', )
+    .then((response) => {
+      console.log(response);
+      navigate.push('/dashboard');
+    })
   }
   return (
     <div>
@@ -27,7 +37,7 @@ function Landing() {
           <h2 className='hero-title'>Welcome to LAD Bank</h2>
           <p className='hero-subtitle'>Your reliable partner in banking and finance.</p>
         </div>
-        <ButtonComponent className='hero-btn'  onclick= {handleClick}/>
+        <ButtonComponent className='hero-btn' onClick= {goToSignUp}/>
       </header>
 
       {/* Features Section */}
