@@ -1,10 +1,12 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
-function ButtonComponent() {
+function ButtonComponent({className, onClick}) {
   return (
     <>
-      <Button variant="primary">Get started</Button>{' '}
+      <Button className={className} variant="primary" onClick={onClick}>
+        Get started
+      </Button>
       
     </>
   );

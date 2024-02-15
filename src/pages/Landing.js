@@ -12,10 +12,14 @@ function Landing() {
   const goToSignUp = () => {
     navigate('/signup')
 
+
+  const customerId = "yourCustomerID"; // Make sure to replace this with the actual customer ID
+  const data = { /* your data payload here */ };
+
     axios.post('customer/${customerId}/accounts', )
     .then((response) => {
       console.log(response);
-      navigate.push('/dashboard');
+      navigate('/dashboard');
     })
   }
   return (
