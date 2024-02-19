@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   
     const login = async (email, password) => {
       try {
-        const response = await axios.post('/login', { email, password });
+        const response = await axios.post('http://localhost:3000/login', { email, password });
         setUser(response.data); // Assuming the response data includes user info
       } catch (error) {
         console.error("Login error:", error);
