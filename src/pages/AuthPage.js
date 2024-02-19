@@ -6,44 +6,22 @@ import axios from 'axios';
 function AuthPage() {
   const { login, logout } = useAuth();
   const [isSignUp, setIsSignUp] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = isSignUp ? '/api/signup' : '/api/signin';
+    const url = isSignUp ? `${apiUrl}/signup` : `${apiUrl}/login`;
 
     try {
-      const response = await axios.post(url, { email, password });
-      // Handle response, such as saving the session token
-      login(response.data);
-      // Redirect user or update UI accordingly
-
+      const response = await axios(isSignUp ? signUp(email, password) :login(email, password));
+      console.log('Response: ', response);
+      navigate('/dashboard');
     } catch (error) {
-      console.error('Error:', error.response.data);
+      console.error('Error:', error.response ? error.response.data: error);
       // Handle errors (e.g., user already exists, wrong credentials)
     }
   };
-
-    logout = async () => {
-    try {
-      await axios.post('/api/logout');
-      // Clear user session from state management and local storage
-      console.log('Logged out successfully');
-    } catch (error) {
-      console.error('Logout error:', error.response.data);
-    }
-  };
-  
-  
-
-    // Inside your component
-    const navigate = useNavigate();
-
-    // After successful login
-    navigate.push('/dashboard');
-
-
 
   return (
     <div>

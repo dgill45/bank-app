@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
+const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
+
 const AuthContext = createContext();
 
 export function useAuth() {
@@ -10,8 +12,8 @@ export function useAuth() {
 }
 
 export const AuthProvider = ({ children }) => {
-  const [first_name, setFirstName] = (''); 
-  const [last_name, setLastName] = ('');
+  const [first_name, setFirstName] = useState(''); 
+  const [last_name, setLastName] = useState('');
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -19,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   
     const login = async (email, password) => {
       try {
-        const response = await axios.post('http://localhost:3000/login', { email, password });
+        const response = await axios.post(`${apiUrl}/login`, { email, password });
         setUser(response.data); // Assuming the response data includes user info
       } catch (error) {
         console.error("Login error:", error);
