@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 export const Accounts = () =>{
     const [accounts, setAccounts] = useState{[]};
@@ -8,11 +9,18 @@ export const Accounts = () =>{
         fetchAccountsForCustomer(customerId);
     })
 
+    const fetchCustomerDetails = async () => {
+        const customerId = getLoggedInCustomerId(); // Implement this to retrieve the ID
+        if (!customerId) {
+          console.log("No customer ID found");
+          return;
+        }
+        
     const fetchAccountsForCustomer = async (customerId) => {
         try {
           // Replace with the actual URL and ensure it includes the customerId
           // Adjust the URL as needed based on your API's endpoint structure
-          const response = await axios.get(`http://localhost:3000/customers/${customerId}/accounts`);
+          const response = await axios.get(`https://localhost:3000/customers/${customerId}/accounts`);
           setAccounts(response.data);
         } catch (error) {
           console.error("Error fetching accounts:", error);

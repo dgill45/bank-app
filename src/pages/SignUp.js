@@ -1,17 +1,41 @@
 import React from 'react';
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
-
-    const {username, setUsername, email, setEmail, password, setPassword, signUp } = useAuth();
+    const navigate = useNavigate();
+    const {first_name, setFirstName, last_name, setLastName,
+            username, setUsername, email, setEmail,
+            password, setPassword, signUp } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    signUp();
+    try {
+        await signUp();
+        navigate('/dashboard');
+    } catch (error) {
+        console.error('Error signing up:', error)
+        alert('Error signing up:')
+    }
+    
   };
 
   return (
     <form onSubmit={handleSubmit}>
+        <div>
+            <label>First Name</label>
+            <input type="text" 
+                   value={first_name} 
+                   placeholder = 'First Name'
+                   onChange={(e) => setFirstName(e.target.value)} />
+        </div>
+        <div>
+            <label>Last Name</label>
+            <input type="text" 
+                   value={last_name} 
+                   placeholder = 'Last Name'
+                   onChange={(e) => setLastName(e.target.value)} />
+        </div>
         <div>
             <label>Username</label>
             <input type="username" 
