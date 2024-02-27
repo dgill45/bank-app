@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
+
 function Login() {
     const navigate = useNavigate();
-    const { email, setEmail, password, setPassword, login } = useAuth();
+    const { email, setEmail} = useState('');
+    const { password, setPassword } = useState('');
+    const { login } = useAuth();
 
     const handleSubmit = async (event) => {
         event.preventDefault();

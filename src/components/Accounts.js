@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export const Accounts = () =>{
-    const [accounts, setAccounts] = useState{[]};
+export const Accounts = () => {
+    const [accounts, setAccounts] = useState([]);
 
     useEffect(() => {
         const customerId = getLoggedInCustomerId(); // Implement this function based on your auth system

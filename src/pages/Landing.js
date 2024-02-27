@@ -5,23 +5,25 @@ import ButtonComponent from '../components/ButtonComponent';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
+
 function Landing() {
 
   let navigate = useNavigate();
 
-  const goToSignUp = () => {
-    navigate('/signup')
+  const goToAuth = (isSignUp) => {
+    navigate('/auth', { state: { isSignUp: isSignUp } });
 
 
-  const customerId = "yourCustomerID"; // Make sure to replace this with the actual customer ID
-  const data = { /* your data payload here */ };
-
-    axios.post('customer/${customerId}/accounts', )
+    axios.post(`${apiUrl}/customers/`, )
     .then((response) => {
       console.log(response);
       navigate('/dashboard');
-    })
-  }
+    }).catch(error => {
+      console.error('Error during signup:', error);
+    });
+  };
+
   return (
     <div>
         <NavbarComponent />
@@ -32,8 +34,8 @@ function Landing() {
         <div className= 'hero-content'>
           <h2 className='hero-title'>Welcome to LAD Bank</h2>
           <p className='hero-subtitle'>Your reliable partner in banking and finance.</p>
+          <ButtonComponent className='hero-btn' onClick= {goToAuth}/>
         </div>
-        <ButtonComponent className='hero-btn' onClick= {goToSignUp}/>
       </header>
 
       {/* Features Section */}

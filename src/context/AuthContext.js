@@ -14,7 +14,7 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
   const [first_name, setFirstName] = useState(''); 
   const [last_name, setLastName] = useState('');
-  const [user, setUser] = useState(null);
+  const [customer, setCustomer] = useState(null);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
       try {
         const response = await axios.post(`${apiUrl}/login`, { email, password });
-        setUser(response.data); // Assuming the response data includes user info
+        setCustomer(response.data); // Assuming the response data includes user info
       } catch (error) {
         console.error("Login error:", error);
         // Handle errors, e.g., show a message to the user
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
       try {
         await axios.post('/logout');
-        setUser(null); // Clear user from context
+        setCustomer(null); // Clear user from context
       } catch (error) {
         console.error("Logout error:", error);
       }
@@ -40,8 +40,8 @@ export const AuthProvider = ({ children }) => {
 
     const signUp = async () => {
       try {
-        const response = await axios.post('http://localhost:3000/users', {
-          user: {
+        const response = await axios.post(`${apiUrl}/customers`, {
+          customer: {
               first_name,
               last_name,
               username,
@@ -53,24 +53,26 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error(error);
       }
+    }
 
       
-    const getCustomerDetails = async (customerId) => {
+    const getCustomerDetails = async () => {
+      if (customer && customer.id) {
       try {
-        // Replace `customerId` in the URL with the actual ID you have
-        const response = await axios.get(`http://localhost:3000/customers/${customerId}`);
-        return response.data; // Return the customer details
+        const response = await axios.get(`${apiUrl}/customers/${customer.id}`);
+        return response.data;
       } catch (error) {
         console.error("Error fetching customer details:", error);
-        return null; // Handle error (e.g., return null or throw an error)
+        return null; 
       }
     }
   }
+    
 
 
   return (
     <AuthContext.Provider value={{ 
-      user, 
+      customer,
       login, 
       logout,
       signUp,
@@ -83,9 +85,9 @@ export const AuthProvider = ({ children }) => {
       first_name,
       setFirstName,
       last_name,
-      setLastName
-      
-       }}>
+      setLastName,
+      getCustomerDetails
+    }}>
       {children}
     </AuthContext.Provider>
   );

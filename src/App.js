@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import BankApp from './components/BankApp';
+//import BankApp from './components/BankApp';
 import Landing from './pages/Landing';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
