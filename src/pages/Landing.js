@@ -11,8 +11,8 @@ function Landing() {
 
   let navigate = useNavigate();
 
-  const goToAuth = (isSignUp) => {
-    navigate('/auth', { state: { isSignUp: isSignUp } });
+  const goToSignUp = () => {
+    navigate('/signup')
 
 
     axios.post(`${apiUrl}/customers/`, )
@@ -34,7 +34,7 @@ function Landing() {
         <div className= 'hero-content'>
           <h2 className='hero-title'>Welcome to LAD Bank</h2>
           <p className='hero-subtitle'>Your reliable partner in banking and finance.</p>
-          <ButtonComponent className='hero-btn' onClick= {goToAuth}/>
+          <ButtonComponent className='hero-btn' onClick={goToSignUp}/>
         </div>
       </header>
 

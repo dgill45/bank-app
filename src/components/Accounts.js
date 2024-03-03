@@ -1,38 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
+
+const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
 
 export const Accounts = () => {
     const [accounts, setAccounts] = useState([]);
+    const { customer } = useAuth();
 
     useEffect(() => {
-        const customerId = getLoggedInCustomerId(); // Implement this function based on your auth system
-        fetchAccountsForCustomer(customerId);
-    })
-
-    const fetchCustomerDetails = async () => {
-        const customerId = getLoggedInCustomerId(); // Implement this to retrieve the ID
-        if (!customerId) {
-          console.log("No customer ID found");
-          return;
-        }
+      if (customer && customer.id) {
+          fetchAccountsForCustomer(customer.id);
+      }
+    }, [customer]);
         
     const fetchAccountsForCustomer = async (customerId) => {
-        try {
-          // Replace with the actual URL and ensure it includes the customerId
-          // Adjust the URL as needed based on your API's endpoint structure
-          const response = await axios.get(`https://localhost:3000/customers/${customerId}/accounts`);
+      try {
+          const response = await axios.get(`${apiUrl}/customers/${customerId}/accounts`, {
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          });
           setAccounts(response.data);
-        } catch (error) {
-          console.error("Error fetching accounts:", error);
-        }
-      };
-
-    
-    
+      } catch (error) {
+        console.error("Error fetching accounts:", error);
+      }
+    };
     
     return (
         <div className ='accounts-container'>
-            <h2>Accounts</h2>
+            <h2>{customer_firstname}'s Accounts</h2>
             <div className='accounts-list'>
                 {accounts.map((account, index) =>(
                     <div key={index} className='account-card'>

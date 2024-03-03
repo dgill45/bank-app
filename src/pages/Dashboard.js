@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useAuth} from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
 
@@ -37,18 +37,32 @@ const Dashboard = () => {
     navigate(`/account/${accountId}`);
   };
 
+  const handleCreateAccount = () => {
+    // Redirect to the account creation page or handle account creation logic
+    navigate('/create-account');
+  };
+
   return (
     <div>
-      <h1>Welcome to Your Dashboard</h1>
-      <h2>Your Bank Accounts:</h2>
-      {accounts.map((account) => (
-        <div key={account.id} className="account-card">
-          <h3>{account.name}</h3>
-          <p>Balance: {account.balance}</p>
-          <button onClick={() => handleAccountClick(account.id)}>View Transactions</button>
+      <h1>Welcome to Your Dashboard, {customer ? customer.first_name : "Customer"}</h1>
+      {accounts.length > 0 ? (
+        <div>
+          <h2>Your Bank Accounts:</h2>
+          {accounts.map((account) => (
+            <div key={account.id} className="account-card">
+              <h3>{account.name}</h3>
+              <p>Balance: {account.balance}</p>
+              <button onClick={() => handleAccountClick(account.id)}>View Transactions</button>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+        ) : (
+          <div>
+            <h2>You do not have any bank accounts.  </h2>
+            <button onClick={handleCreateAccount}>Create New Account</button>
+          </div>
+        )}
+      </div>
   );
 };
 

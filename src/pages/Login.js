@@ -6,8 +6,8 @@ const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
 
 function Login() {
     const navigate = useNavigate();
-    const { email, setEmail} = useState('');
-    const { password, setPassword } = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
     const { login } = useAuth();
 
     const handleSubmit = async (event) => {
@@ -30,6 +30,7 @@ function Login() {
                     value={email} 
                     placeholder='Email' 
                     onChange={(e) => setEmail(e.target.value)} 
+                    required
                 />
             </div>
             <div>
@@ -39,6 +40,7 @@ function Login() {
                     value={password} 
                     placeholder='Password' 
                     onChange={(e) => setPassword(e.target.value)} 
+                    required
                 />
             </div>
             <button type="submit">Login</button>
