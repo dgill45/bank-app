@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
 
 function Login() {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ function Login() {
         event.preventDefault();
         try {
             await login(email, password);
-            navigate('/dashboard'); // Redirect to the dashboard after login
+            navigate('/dashboard'); 
         } catch (error) {
             console.error('Error logging in:', error);
             alert('Login failed: Incorrect email or password');
@@ -22,29 +23,34 @@ function Login() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Email</label>
-                <input 
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className='mb-3' controlId="formBasicEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control 
                     type="email" 
                     value={email} 
                     placeholder='Email' 
                     onChange={(e) => setEmail(e.target.value)} 
                     required
                 />
-            </div>
-            <div>
-                <label>Password</label>
-                <input 
+                <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                </Form.Text>
+            </Form.Group>
+            <Form.Group className='mb-3'controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control 
                     type="password" 
                     value={password} 
                     placeholder='Password' 
                     onChange={(e) => setPassword(e.target.value)} 
                     required
                 />
-            </div>
-            <button type="submit">Login</button>
-        </form>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Login
+            </Button>
+        </Form>
     );
 }
 

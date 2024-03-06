@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
+
+const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
 
 const AccountForm = () => {
     const [accountType, setAccountType] = useState('');
     const [initialDeposit, setInitialDeposit] = useState('');
+    const { customer } = useAuth(); // Assuming you have a useAuth hook to get the customer from the context
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-  };
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (!customer || !customer.id) {
+        alert("You must be logged in to create an account.");
+        return;
+    }
+      const accountData = {
+        accountType,
+        initialDeposit,
+        customerId: customer.id,
+    };
 
+      try {
+          // Adjust the URL and data as needed for your API endpoint
+          const response = await axios.post(`${apiUrl}/customers/${customer.id}/accounts`, accountData);
+          console.log('Account created successfully', response.data);
+          // Redirect or update UI upon successful account creation
+      } catch (error) {
+          console.error('Error creating account:', error);
+          alert('Failed to create account. Please try again.');
+      }
+};
   return (
     <form onSubmit={handleSubmit}>
     <label>

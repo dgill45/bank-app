@@ -1,6 +1,4 @@
-// Context API example
-// AuthContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
@@ -14,18 +12,37 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
   const [first_name, setFirstName] = useState(''); 
   const [last_name, setLastName] = useState('');
+  const [username, setUsername] = useState(null);
   const [customer, setCustomer] = useState(null);
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const checkLoginStatus = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/logged_in`, { withCredentials: true });
+      if (response.data.logged_in) {
+        setCustomer(response.data.customer);
+      }else {
+        setCustomer(null);
+      }
+    } catch (error) {
+      console.error("Error checking login status:", error);
+    }
+  }
+    
+    useEffect(() => {      
+      checkLoginStatus();
+    }, []);
   
     const login = async (email, password) => {
       try {
-        const response = await axios.post(`${apiUrl}/login`, { email, password });
-        setCustomer(response.data); // Assuming the response data includes user info
+        const response = await axios.post(`${apiUrl}/login`, { email, password },{ withCredentials: true });
+        if (response.data.customer) {
+        setCustomer(response.data.customer);
+        } // Assuming the response data includes user info
       } catch (error) {
         console.error("Login error:", error);
-        // Handle errors, e.g., show a message to the user
+        throw error;
       }
     };
 
@@ -77,6 +94,7 @@ export const AuthProvider = ({ children }) => {
       logout,
       signUp,
       username,
+      checkLoginStatus,
       setUsername,
       email,
       setEmail,
