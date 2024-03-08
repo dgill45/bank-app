@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import { AuthProvider } from './context/AuthContext';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import AccountForm from './pages/AccountForm';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             <Route path= '/signup' element= {<SignUp />} />
             <Route path= '/login' element= {<Login />} />
             <Route path= '/dashboard' element= {<Dashboard />} /> 
+            <Route path= '/account/:accountId' element= {<Dashboard />} />
+            <Route path= '/create-account' element= {<AccountForm />} />
           </Routes>
         </Router>
       </AuthProvider>

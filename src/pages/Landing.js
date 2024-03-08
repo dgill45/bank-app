@@ -2,10 +2,8 @@ import React from 'react';
 import './Landing.css';
 import NavbarComponent from '../components/NavbarComponent';
 import ButtonComponent from '../components/ButtonComponent';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
 
 function Landing() {
 
@@ -14,14 +12,6 @@ function Landing() {
   const goToSignUp = () => {
     navigate('/signup')
 
-
-    axios.post(`${apiUrl}/customers/`, )
-    .then((response) => {
-      console.log(response);
-      navigate('/dashboard');
-    }).catch(error => {
-      console.error('Error during signup:', error);
-    });
   };
 
   return (

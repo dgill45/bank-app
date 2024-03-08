@@ -14,6 +14,7 @@ function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            console.log(`Attempting to log in with ${email} and password: ${password}`);
             await login(email, password);
             navigate('/dashboard'); 
         } catch (error) {
@@ -41,6 +42,7 @@ function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control 
                     type="password" 
+                    className='form-control mb-3 mr-sm-2'
                     value={password} 
                     placeholder='Password' 
                     onChange={(e) => setPassword(e.target.value)} 

@@ -37,7 +37,7 @@ const Dashboard = () => {
     navigate(`/account/${accountId}`);
   };
 
-  const handleCreateAccount = () => {
+  const goToAccountForm = () => {
     // Redirect to the account creation page or handle account creation logic
     navigate('/create-account');
   };
@@ -59,7 +59,7 @@ const Dashboard = () => {
         ) : (
           <div>
             <h2>You do not have any bank accounts.  </h2>
-            <button onClick={handleCreateAccount}>Create New Account</button>
+            <button onClick={goToAccountForm}>Create New Account</button>
           </div>
         )}
       </div>
