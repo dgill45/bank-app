@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+
   const checkLoginStatus = async () => {
     try {
       const response = await axios.get(`${apiUrl}/logged_in`, { withCredentials: true });
@@ -48,8 +49,9 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
       try {
-        await axios.post('/logout');
-        setCustomer(null); // Clear user from context
+        await axios.delete(`${apiUrl}/logout`, { withCredentials: true });
+        setCustomer(null); 
+        window.location.href='/' // Redirect to the home page;
       } catch (error) {
         console.error("Logout error:", error);
       }

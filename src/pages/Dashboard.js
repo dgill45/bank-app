@@ -7,7 +7,7 @@ const apiUrl = process.env.REACT_APP_LAD_BANK_API_BASE_URL;
  // Assuming useAuth() gives you access to the logged-in user
 
 const Dashboard = () => {
-  const { customer } = useAuth();
+  const { customer, logout } = useAuth();
   const navigate = useNavigate();
   const [accounts, setAccounts] = useState([]);
 
@@ -47,11 +47,12 @@ const Dashboard = () => {
       <h1>Welcome to Your Dashboard, {customer ? customer.first_name : "Customer"}</h1>
       {accounts.length > 0 ? (
         <div>
-          <h2>Your Bank Accounts:</h2>
+          <h4>Your Bank Accounts:</h4>
           {accounts.map((account) => (
             <div key={account.id} className="account-card">
               <h3>{account.name}</h3>
-              <p>Balance: {account.balance}</p>
+              <h4>{account.account_type}</h4>
+              <h4>Balance: {account.balance}</h4>
               <button onClick={() => handleAccountClick(account.id)}>View Transactions</button>
             </div>
           ))}
@@ -62,7 +63,11 @@ const Dashboard = () => {
             <button onClick={goToAccountForm}>Create New Account</button>
           </div>
         )}
+      
+      <div>
+        <button onClick={logout}>Logout</button>
       </div>
+    </div>
   );
 };
 
