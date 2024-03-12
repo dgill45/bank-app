@@ -28,7 +28,7 @@ function SignUp() {
             <Form.Label>First Name</Form.Label>
             <Form.Control 
                 type="text" 
-                value={first_name} 
+                value={first_name || ''} 
                 placeholder='First Name' 
                 onChange={(e) => setFirstName(e.target.value)} 
                 required
@@ -38,7 +38,7 @@ function SignUp() {
             <Form.Label>Last Name</Form.Label>
             <Form.Control 
                 type="text" 
-                value={last_name} 
+                value={last_name || ''} 
                 placeholder='Last Name' 
                 onChange={(e) => setLastName(e.target.value)} 
                 required    
@@ -48,7 +48,7 @@ function SignUp() {
             <Form.Label>Username</Form.Label>
             <Form.Control
                 type="username" 
-                value={username} 
+                value={username || ''} 
                 placeholder='Username' 
                 onChange={(e) => setUsername(e.target.value)} 
                 required
@@ -58,7 +58,7 @@ function SignUp() {
             <Form.Label>Email</Form.Label>
             <Form.Control
                 type="email" 
-                value={email} 
+                value={email || ''} 
                 placeholder='Email' 
                 onChange={(e) => setEmail(e.target.value)} 
                 required
@@ -68,7 +68,7 @@ function SignUp() {
             <Form.Label>Password</Form.Label>
             <Form.Control
                 type="password" 
-                value={password} 
+                value={password || ''} 
                 placeholder='Password' 
                 onChange={(e) => setPassword(e.target.value)} 
                 required
