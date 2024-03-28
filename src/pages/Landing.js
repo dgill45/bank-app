@@ -13,6 +13,10 @@ function Landing() {
     navigate('/signup')
 
   };
+  
+  const goToLogin = () => {
+    navigate('/login')
+  };
 
   return (
     <div>
@@ -24,7 +28,9 @@ function Landing() {
         <div className= 'hero-content'>
           <h2 className='hero-title'>Welcome to LAD Bank</h2>
           <p className='hero-subtitle'>Your reliable partner in banking and finance.</p>
-          <ButtonComponent className='hero-btn' onClick={goToSignUp}/>
+          <ButtonComponent className='hero-btn' onClick={goToSignUp} text="Get started"/>
+          <p className='text-muted'>Already have an account? </p>
+          <ButtonComponent className='hero-btn' onClick={goToLogin} text="Login here" /> 
         </div>
       </header>
 
