@@ -57,18 +57,15 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    const signUp = async () => {
+    const signUp = async (userData) => {
       try {
         const response = await axios.post(`${apiUrl}/customers`, {
-          customer: {
-              first_name,
-              last_name,
-              username,
-              email,
-              password,
-          }
+          customer: userData 
         }, { withCredentials: true }); // Important for CORS and cookies
         console.log(response.data);
+        if (response.data.customer) {
+          setCustomer(response.data.customer);
+        }
       } catch (error) {
         console.error(error);
       }

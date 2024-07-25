@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ButtonComponent from '../components/ButtonComponent';
-import AccountDetails from './AccountDetails';
-import BankApp from '../components/BankApp';
+import AccountCard from '../components/AccountCard';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -62,23 +61,15 @@ const Dashboard = () => {
       {accounts.length > 0 ? (
         <div>
           <h4>Your Bank Accounts:</h4>
-          {accounts.map((account) => (
-            <div key={account.id} className="account-card" onClick={() =>handleAccountClick(account.id)}>
-              <h3>Account: {account.account_type}</h3>
-              <h4>Balance: {account.balance}</h4>
-              <div>
-                <h5>Recent Transactions:</h5>
-                <ul>
-                  {account.recent_transactions.map((transaction) => (
-                    <li key={transaction.id}>
-                      {transaction.transaction_type} - ${transaction.amount} on {new Date(transaction.created_at).toLocaleDateString()}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <ButtonComponent onClick={() => handleAccountClick(account.id)} text="View Account Activity" />
-            </div>
-          ))}
+          <div>
+            {accounts.map((account) => (
+              <AccountCard
+                key={account.id}
+                account={account}
+                onViewAccountDetails={handleAccountClick}
+              />
+            ))}
+          </div>
         </div>
         ) : (
           <div>

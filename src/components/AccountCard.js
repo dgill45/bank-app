@@ -2,9 +2,14 @@ import React from 'react';
 import ButtonComponent from './ButtonComponent';
 
 const AccountCard = ({account, onViewAccountDetails }) => {
+
+  const handleViewDetailsClick  = () => {
+    console.log("Viewing account details for account:", account.id);
+    onViewAccountDetails(account.id);
+  };
     
     return (
-        <div className="account-card" onClick={() => onViewAccountDetails(account.id)}>
+        <div className="account-card">
           <h3>Account: {account.account_type}</h3>
           <h4>Balance: {account.balance}</h4>
           <div>
@@ -17,7 +22,7 @@ const AccountCard = ({account, onViewAccountDetails }) => {
               ))}
             </ul>
           </div>
-          <ButtonComponent onClick={() => onViewAccountDetails(account.id)} text="View Account Activity" />
+          <ButtonComponent onClick={(handleViewDetailsClick) } text="View Account Activity" />
         </div>
       );
     };

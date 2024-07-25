@@ -16,8 +16,16 @@ function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const userData = {
+        first_name,
+        last_name,
+        username,
+        email,
+        password
+    };
+
     try {
-        await signUp();
+        await signUp(userData);
         navigate('/dashboard');
     } catch (error) {
         console.error('Error signing up:', error)
